@@ -1,0 +1,16 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/blocks/nand3/schematic/nand3.sch
+**.subckt nand3 VDD VA VB VC VOUT VSS
+*.iopin VDD
+*.iopin VSS
+*.ipin VA
+*.ipin VB
+*.opin VOUT
+*.ipin VC
+XM1 net1 VA VSS VSS sg13_lv_nmos w=0.45u l=0.13u ng=1
+XM2 VOUT VC net2 VSS sg13_lv_nmos w=0.45u l=0.13u ng=1
+XM3 VOUT VB VDD VDD sg13_lv_pmos w=0.3u l=0.13u ng=1
+XM4 VOUT VA VDD VDD sg13_lv_pmos w=0.3u l=0.13u ng=1
+XM5 VOUT VC VDD VDD sg13_lv_pmos w=0.3u l=0.13u ng=1
+XM6 net2 VB net1 VSS sg13_lv_nmos w=0.45u l=0.13u ng=1
+**.ends
+.end
