@@ -8,9 +8,9 @@ VVSS VSS 0 0
 VVDD VDD VSS 1.2
 
 * Inputs
-VVA VA VSS PULSE(0 1.2 1n 50p 50p 10n 20n)
-VVB VB VSS PULSE(0 1.2 1n 50p 50p 20n 40n)
-VVC VC VSS PULSE(0 1.2 1n 50p 50p 40n 80n)
+VVA VA VSS PULSE(0 1.2 10p 5p 5p 0.5n 1n)
+VVB VB VSS PULSE(0 1.2 10p 5p 5p 1n 2n)
+VVC VC VSS PULSE(0 1.2 10p 5p 5p 2n 4n)
 
 * Schematic NAND3
 * Port order in netlist/nand3.spice:
@@ -20,7 +20,7 @@ XU_NAND3 VDD VA VB VC VOUT VSS nand3
 * Load
 CLOAD VOUT VSS 1f
 
-.tran 20p 180n
+.tran 1p 8n
 
 .control
 run
