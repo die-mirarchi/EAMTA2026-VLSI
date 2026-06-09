@@ -1,0 +1,44 @@
+** sch_path: /home/eamtastudent/EAMTA2026-VLSI/design/simulations/tb_nand3.sch
+**.subckt tb_nand3
+**** begin user architecture code
+
+
+.title NAND3 schematic transient
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /home/eamtastudent/EAMTA2026-VLSI/netlist/nand3.spice
+VVSS VSS 0 0
+VDD  VDD VSS 1.2
+VVA VA VSS PULSE(0 1.2 1n 50p 50p 10n 20n)
+VVB VB VSS PULSE(0 1.2 1n 50p 50p 20n 40n)
+VVC VC VSS PULSE(0 1.2 1n 50p 50p 40n 80n)
+XU1 VDD VA VB VC VOUT VSS nand3
+CLOAD VOUT VSS 1f
+.tran 20p 180n
+.control
+run
+plot v(VA) v(VB)+1.5 v(VC)+3.0 v(VOUT)+4.5
+.endc
+
+
+
+
+.title NAND3 layout transient
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /home/eamtastudent/EAMTA2026-VLSI/netlist/nand3_extracted_latest_sim.spice
+VVSS VSS 0 0
+VDD  VDD VSS 1.2
+VVA VA VSS PULSE(0 1.2 1n 50p 50p 10n 20n)
+VVB VB VSS PULSE(0 1.2 1n 50p 50p 20n 40n)
+VVC VC VSS PULSE(0 1.2 1n 50p 50p 40n 80n)
+XU2 VDD VA VB VC VOUT VSS nand3
+CLOAD VOUT VSS 1f
+.tran 20p 180n
+.control
+run
+plot v(VA) v(VB)+1.5 v(VC)+3.0 v(VOUT)+4.5
+.endc
+
+
+**** end user architecture code
+**.ends
+.end

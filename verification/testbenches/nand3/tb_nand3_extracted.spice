@@ -1,0 +1,32 @@
+.title NAND3 extracted-layout transient
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /home/eamtastudent/EAMTA2026-VLSI/netlist/nand3_extracted_065621_xsim.spice
+
+* Supplies
+VVSS VSS 0 0
+VVDD VDD VSS 1.2
+
+* Inputs
+VVA VA VSS PULSE(0 1.2 1n 50p 50p 10n 20n)
+VVB VB VSS PULSE(0 1.2 1n 50p 50p 20n 40n)
+VVC VC VSS PULSE(0 1.2 1n 50p 50p 40n 80n)
+
+* Extracted NAND3
+* extracted netlist: .SUBCKT nand3 VSS VA VB VC VDD VOUT
+XU_NAND3_EXT VSS VA VB VC VDD VOUT nand3
+
+* Load
+CLOAD VOUT VSS 1f
+
+.tran 20p 180n
+
+.control
+set wr_singlescale
+run
+write /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/nand3/results/tb_nand3_extracted.raw
+wrdata /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/nand3/results/tb_nand3_extracted.txt time v(VA) v(VB) v(VC) v(VOUT)
+quit
+.endc
+
+.end

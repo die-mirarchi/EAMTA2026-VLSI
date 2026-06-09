@@ -1,0 +1,31 @@
+.title NAND3 schematic transient
+
+.lib /foss/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerMOSlv.lib mos_tt
+.include /home/eamtastudent/EAMTA2026-VLSI/netlist/nand3.spice
+
+* Supplies
+VVSS VSS 0 0
+VVDD VDD VSS 1.2
+
+* Inputs
+VVA VA VSS PULSE(0 1.2 1n 50p 50p 10n 20n)
+VVB VB VSS PULSE(0 1.2 1n 50p 50p 20n 40n)
+VVC VC VSS PULSE(0 1.2 1n 50p 50p 40n 80n)
+
+* Schematic NAND3
+* Port order in netlist/nand3.spice:
+* .subckt nand3 VDD VA VB VC VOUT VSS
+XU_NAND3 VDD VA VB VC VOUT VSS nand3
+
+* Load
+CLOAD VOUT VSS 1f
+
+.tran 20p 180n
+
+.control
+run
+write /home/eamtastudent/EAMTA2026-VLSI/verification/testbenches/nand3/results/tb_nand3_schematic.raw
+plot v(VA) v(VB)+1.5 v(VC)+3.0 v(VOUT)+4.5
+.endc
+
+.end
